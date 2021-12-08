@@ -11,7 +11,7 @@
 		"html": false
 	},
 	"textdomain": "multi-blocks",
-	"editorScript": "file:../../build/index.js",
-	"editorStyle": "file:../../build/index.css",
-	"style": "file:../../build/style-index.css"
+	"editorScript": "file:../../build/example-block.js",
+	"editorStyle": "file:../../build/example-block.css",
+	"style": "file:../../build/style-example-block.css"
 }

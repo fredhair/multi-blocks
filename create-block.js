@@ -54,4 +54,5 @@ fs.writeFileSync(path.resolve(blockPath, blockFiles.save), interpolateBuffer(buf
 buffer = fs.readFileSync(path.resolve(templatePath, blockFiles.style));
 fs.writeFileSync(path.resolve(blockPath, blockFiles.style), interpolateBuffer(buffer, { blockName }));
 
-fs.appendFileSync(path.resolve(srcPath, 'index.js'), `import '../library/${blockName}';\n`);
+// Needed if not creating separate entrypoints. If bundling all blocks together use this:
+// fs.appendFileSync(path.resolve(srcPath, 'index.js'), `import '../library/${blockName}';\n`);

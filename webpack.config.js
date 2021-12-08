@@ -1,11 +1,19 @@
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
-// Create a dictionary ['name': 'path'] of all blocks as necessary as part of build
-// const allBlocks = require('./library/all-blocks.json');
+const glob = require('glob');
+const path = require('path');
 
 module.exports = {
 	...defaultConfig,
-	// Use this if you need multiple entry points (creates independent source files for each block)
-	// entry: {
-	// 	'example-block': './library/example-block',
-	// },
+
+	// Remove this and use the src/index.js method if you want to bundle all blocks together.
+	// Ensure you have a src/index.js in the root folder and uncomment the last line from create-block.js
+	entry: glob.sync('./library/**/index.js').reduce((prev, dir) => {
+
+		const folder = dir.replace('./library/', '').replace('/index.js', '');
+
+		return {
+			...prev,
+			[folder]: path.resolve(__dirname, 'library/' + folder),
+		};
+	}, {}),
 };

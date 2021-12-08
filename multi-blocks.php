@@ -22,6 +22,9 @@
  */
 function dd_blocks_multi_blocks_block_init() {
 
+	// TODO: Use apply_filters() to allow removing certain blocks?
+	// would still load dynamic entry points in webpack config though.
+
 	//Find all subdirs in /library, each one represents an individual block
 	foreach( glob( plugin_dir_path( __FILE__ ) . '/library/*', GLOB_ONLYDIR ) as $block ) {
 		register_block_type( $block );
