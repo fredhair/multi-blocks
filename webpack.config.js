@@ -6,7 +6,7 @@ module.exports = {
 	...defaultConfig,
 
 	// Remove this and use the src/index.js method if you want to bundle all blocks together.
-	// Ensure you have a src/index.js in the root folder and uncomment the last line from create-block.js
+	// See readme for details
 	entry: glob.sync('./library/**/index.js').reduce((prev, dir) => {
 
 		const folder = dir.replace('./library/', '').replace('/index.js', '');

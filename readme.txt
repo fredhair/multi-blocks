@@ -14,31 +14,20 @@ This plugin is designed to be cloned and extended rather than used as is.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
+After activation your blocks should be loaded automatically.
+To create new blocks run 'npm run new-block YOUR-BLOCK-NAME'
 e.g.
+`npm run new-block cool-accordion`
 
-1. Upload the plugin files to the `/wp-content/plugins/multi-blocks` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
+run npm run start to compile your block assets, as long as this plugin is activated
+your blocks should be available to you right away.
 
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= How do I delete blocks =
 
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
-
-== Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+Simply delete the whole block folder from 'library/'
 
 == Changelog ==
 
@@ -46,7 +35,10 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 * Release
 
 == Arbitrary section ==
+To use a single monolithic bundle for all blocks simple uncomment the last line from create-block.js.
+You must also comment out the entry section of the webpack.config.js.
+Finally, in the templates/block.json, replace the last 3 instances of '${blockName}'
+(editorScript, editorStyle & style) with 'index'.
 
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+Now you should be good to go, your monolithic bundle will be included automatically but you will not be able to
+choose individual blocks to exclude from your project.
