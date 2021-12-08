@@ -1,0 +1,17 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "dd-blocks/example-block",
+	"version": "0.1.0",
+	"title": "Example Block",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "This is an example block, feel free to copy this scaffolding for each new block",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "multi-blocks",
+	"editorScript": "file:../../build/index.js",
+	"editorStyle": "file:../../build/index.css",
+	"style": "file:../../build/style-index.css"
+}
