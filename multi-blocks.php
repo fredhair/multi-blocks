@@ -22,22 +22,9 @@
  */
 function dd_blocks_multi_blocks_block_init() {
 
-	//Find all subdirs in Library for this array.
-	//Make this POSIX compliant
-	$blocks_src = glob(__DIR__ . '/library/*', GLOB_ONLYDIR);
-	$blocks = [];
-	foreach($blocks_src as $block) {
-		$blocks.array_push($blocks, substr($block, strrpos($block, '/') + 1));
-	}
-	// $blocks = [
-	// 	'example-block',
-	// ];
-
-
-	print_r($blocks);
-
-	foreach( $blocks as $block ) {
-		register_block_type( plugin_dir_path( __FILE__ ) . 'library/' . $block );
+	//Find all subdirs in /library, each one represents an individual block
+	foreach( glob( plugin_dir_path( __FILE__ ) . '/library/*', GLOB_ONLYDIR ) as $block ) {
+		register_block_type( $block );
 	}
 }
 
