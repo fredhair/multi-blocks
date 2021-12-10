@@ -28,6 +28,22 @@ function dd_blocks_multi_blocks_block_init() {
 	//Find all subdirs in /library, each one represents an individual block
 	foreach( glob( plugin_dir_path( __FILE__ ) . '/library/*', GLOB_ONLYDIR ) as $block ) {
 		register_block_type( $block );
+
+		// Remove till end of function if you don't need frontend scripts for your blocks
+		// Check if we have a frontend.js script for this block
+		$frontend_script = $block . '/frontend.js';
+
+		if( file_exists( $frontend_script ) ) {
+			// Generate a unique file handle based on the block folder string
+			$unique_handle = str_replace('/', '-', str_replace( plugin_dir_path( __FILE__ ) . '/library/', 'block-script-', $block));
+
+			$url = str_replace( plugin_dir_path( __FILE__ ), plugin_dir_url( __FILE__ ), $frontend_script );
+			$enqueue_function = function() use ( $unique_handle, $url ) {
+				wp_enqueue_script( $unique_handle, $url, array('jquery'), false, true);
+			};
+
+			add_action('wp_enqueue_scripts', $enqueue_function);
+		}
 	}
 }
 

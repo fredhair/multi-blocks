@@ -19,6 +19,7 @@ const blockFiles = {
 	index: 'index.js',
 	save: 'save.js',
 	style: 'style.scss',
+	frontend: 'frontend.js',
 };
 
 // Please note this is a fairly dangerous function and open to XSS,
@@ -53,6 +54,12 @@ fs.writeFileSync(path.resolve(blockPath, blockFiles.save), interpolateBuffer(buf
 // style.scss
 buffer = fs.readFileSync(path.resolve(templatePath, blockFiles.style));
 fs.writeFileSync(path.resolve(blockPath, blockFiles.style), interpolateBuffer(buffer, { blockName }));
+
+
+// Remove this if you don't need a frontend script for each block
+// frontend.js
+buffer = fs.readFileSync(path.resolve(templatePath, blockFiles.frontend));
+fs.writeFileSync(path.resolve(blockPath, blockFiles.frontend), interpolateBuffer(buffer, { blockName }));
 
 // Needed if not creating separate entrypoints. If bundling all blocks together use this:
 // fs.appendFileSync(path.resolve(srcPath, 'index.js'), `import '../library/${blockName}';\n`);
